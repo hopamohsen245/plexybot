@@ -1197,7 +1197,16 @@ member.addRole(role).catch(e => console.log(`Error Detected: ${e.message}`));
 }
 });
 
+ client.on('ready',async () => {
+  let guild = client.guilds.get("504608224402604045");
+  let cMembers = guild.channels.get("505028481072234518"); // Members
+  let cBots = guild.channels.get("505028528081731612"); // Bots
  
+  setInterval(() => {
+    cMembers.setName(`Members 👾 : ${guild.memberCount}`);
+    cBots.setName(`Bots 🎮 : ${guild.members.filter(r => r.user.bot).size}`);
+  }, 5000);
+}); 
  
  
  
