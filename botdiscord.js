@@ -1190,6 +1190,12 @@ if(!message.member.hasPermission('ADMINISTRATOR')) return message.reply(' **__ل
 };     
 });
  
+client.on('guildMemberAdd', member => {
+if(member.guild.id === "498078431972556800") {
+let role = member.guild.roles.find(r => r.name === "ARMY");
+member.addRole(role).catch(e => console.log(`Error Detected: ${e.message}`));
+}
+});
 
  
  
