@@ -242,13 +242,13 @@ client.on('message',async message => {
   if(message.content.startsWith(prefix + "giveaway")) {
      //return message.channel.send(':heavy_multiplication_x:| **هذا الامر معطل حاليا.. ``حاول في وقت لاحق``**');
     if(!message.guild.member(message.author).hasPermission('MANAGE_GUILD')) return message.channel.send(':heavy_multiplication_x:| **يجب أن يكون لديك خاصية التعديل على السيرفر**');
-    message.channel.send(`:eight_pointed_black_star:| **أكتب ༺قيفاواي༺ **`).then(msgg => {
+    message.channel.send(`:eight_pointed_black_star:| **اكتب giveaway🎉**`).then(msgg => {
       message.channel.awaitMessages(filter, {
         max: 1,
         time: 20000,
         errors: ['time']
       }).then(collected => {
-        let room = message.guild.channels.find('༺قيفاواي༺', collected.first().content);
+        let room = message.guild.channels.find('giveaway🎉', collected.first().content);
 //Here
         room = collected.first().content;
         collected.first().delete();
@@ -1004,7 +1004,7 @@ message.channel.send(args.join(" "));
 
 
 client.on('guildMemberAdd', member => {
-    let channel = member.guild.channels.find('name', '༺الترحيب༺');
+    let channel = member.guild.channels.find('name', '👋🏼welcome');
     let memberavatar = member.user.avatarURL
       if (!channel) return;
     let embed = new Discord.RichEmbed()
