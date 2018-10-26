@@ -1234,7 +1234,7 @@ member.addRole(role).catch(e => console.log(`Error Detected: ${e.message}`));
 }); 
  
  
- const devs = ["427855446225846272"];
+ const devs = ["392820611795255318"];
 const adminprefix = ["a$"];
 client.on('message', message => {
     var argresult = message.content.split(` `).slice(1).join(' ');
@@ -1269,7 +1269,7 @@ if (message.content.startsWith(adminprefix + 'setavatar')) {
 }
 });
  
- 
+var prefix = "p$"
 client.on('message', message => {
   if (message.author.ban) return;
   if (!message.content.startsWith(prefix)) return;
@@ -1279,7 +1279,7 @@ client.on('message', message => {
  
   let args = message.content.split(" ").slice(1);
  
-  if (command == "p$ban") {
+  if (command == "ban") {
                if(!message.channel.guild) return;
          
   if(!message.guild.member(message.author).hasPermission("MOVE_MEMBERS")) return message.reply("**You Don't Have ` BAN_MEMBERS ` Permission**").then(msg => msg.delete(5000));
@@ -1301,7 +1301,7 @@ client.on('message', message => {
   .addField("**User:**",  '**[ ' + `${user.tag}` + ' ]**')
   .addField("**By:**", '**[ ' + `${message.author.tag}` + ' ]**')
   .addField("**Reason:**", '**[ ' + `${reason}` + ' ]**')
-  client.channels.get("آي دي روم اللوق").send({embed : banembed})
+  client.channels.get("505376532294926338").send({embed : banembed})
 }
 }); 
  
