@@ -1305,10 +1305,26 @@ client.on('message', message => {
 }); 
  
  
- 
- 
- 
- 
+client.on('message', message => { //bot
+                            if (message.content.startsWith(".bot")) {
+                            message.channel.send({
+                                embed: new Discord.RichEmbed()
+                                    .setAuthor(client.user.username,Rocket.user.avatarURL)
+                                    .setThumbnail(client.user.avatarURL)
+                                    .setColor('RANDOM')
+                                    .setTitle('Name... Bot ')
+                                    .addField('UPtime', [timeCon(process.uptime())], true)
+                                    .addField('PinG' , [${Date.now() - message.createdTimestamp} + 'MS'], true)
+                                    .addField('RAM"s Usage', [${(process.memoryUsage().rss / 1048576).toFixed()}MB], true)
+                                    .addField('servers', [Majd.guilds.size], true)
+                                    .addField('channels' , [ ${Majd.channels.size} ] , true)
+                                    .addField('Users' ,[ ${client.users.size} ] , true)
+                                    .addField('Name' , [ ${client.user.tag} ] , true)
+                                    .addField('ID!' , [ ${client.user.id} ] , true)
+                                          .addField('Prefix' , [ ${prefix} ] , true)
+                                          .addField('Language' , [ JS ] , true)
+                              }
+}); 
  
  
  
