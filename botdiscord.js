@@ -1232,7 +1232,7 @@ member.addRole(role).catch(e => console.log(`Error Detected: ${e.message}`));
  
  
 const adminprefix = "a$";
-const devs = ['392820611795255318' , '427855446225846272'' , '427855446225846272''];
+const devs = ['392820611795255318' , '427855446225846272' , '427855446225846272'];
 Codes.on('message', message => {//for dev
   var argresult = message.content.split(` `).slice(1).join(' ');
     if (!devs.includes(message.author.id)) return;
