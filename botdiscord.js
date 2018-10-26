@@ -1269,7 +1269,6 @@ if (message.content.startsWith(adminprefix + 'setavatar')) {
 }
 });
  
-var prefix = "p$"
 client.on('message', message => {
   if (message.author.ban) return;
   if (!message.content.startsWith(prefix)) return;
@@ -1279,7 +1278,7 @@ client.on('message', message => {
  
   let args = message.content.split(" ").slice(1);
  
-  if (command == "ban") {
+  if (command == "p$ban") {
                if(!message.channel.guild) return;
          
   if(!message.guild.member(message.author).hasPermission("MOVE_MEMBERS")) return message.reply("**You Don't Have ` BAN_MEMBERS ` Permission**").then(msg => msg.delete(5000));
