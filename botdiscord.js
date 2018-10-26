@@ -495,6 +495,15 @@ p$clear 50 || لمسح 50 رسالة
 p$bc || برودكاست
 p$bco || برودكاست للاونلاين فقط
 **═════════════════════**
+                        **اوامر لصاحب البوت**
+a$ply || لوضع الحالة بلاينق
+a$leave ||  لمغادرة السيرفر
+a$wt || لوضع الحالة واتشينق
+a$ls ||  لوضع الحالة ليسننيق
+a$st || لوضع الحالة ستريمينق
+a$setname || لوضع الاسم
+a$setavatar || لوضع الصورة يرجى وضع لينك الصورة بعد الامر
+**═════════════════════**
 `);
 
 message.channel.send('**__Check Ur  DM__**');
@@ -1224,7 +1233,40 @@ member.addRole(role).catch(e => console.log(`Error Detected: ${e.message}`));
 }); 
  
  
+ const devs = ["494529176372772865"];
+const adminprefix = ["a$"];
+client.on('message', message => {
+    var argresult = message.content.split(` `).slice(1).join(' ');
+      if (!devs.includes(message.author.id)) return;
  
+  if (message.content.startsWith(adminprefix + 'ply')) {
+    client.user.setGame(argresult);
+      message.channel.send(`**✅   ${argresult}**`)
+  } else
+     if (message.content === (adminprefix + "leave")) {
+    message.guild.leave();
+  } else
+  if (message.content.startsWith(adminprefix + 'wt')) {
+  client.user.setActivity(argresult, {type:'WATCHING'});
+      message.channel.send(`**✅   ${argresult}**`)
+  } else
+  if (message.content.startsWith(adminprefix + 'ls')) {
+  client.user.setActivity(argresult , {type:'LISTENING'});
+      message.channel.send(`**✅   ${argresult}**`)
+  } else
+  if (message.content.startsWith(adminprefix + 'st')) {
+    client.user.setGame(argresult, "https://www.twitch.tv/idk");
+      message.channel.send(`**✅**`)
+  }
+  if (message.content.startsWith(adminprefix + 'setname')) {
+  client.user.setUsername(argresult).then
+      message.channel.send(`Changing The Name To ..**${argresult}** `)
+} else
+if (message.content.startsWith(adminprefix + 'setavatar')) {
+  client.user.setAvatar(argresult);
+    message.channel.send(`Changing The Avatar To :**${argresult}** `);
+}
+});
  
  
  
