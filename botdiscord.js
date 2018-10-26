@@ -497,11 +497,8 @@ p$ban  || بان
 p$bco || برودكاست للاونلاين فقط
 **═════════════════════**
                         **اوامر لصاحب البوت**
-a$ply || لوضع الحالة بلاينق
-a$leave ||  لمغادرة السيرفر
-a$wt || لوضع الحالة واتشينق
-a$ls ||  لوضع الحالة ليسننيق
-a$st || لوضع الحالة ستريمينق
+a$setgame ||  لوضع الحالة ليسننيق
+a$setT || لوضع الحالة ستريمينق
 a$setname || لوضع الاسم
 a$setavatar || لوضع الصورة يرجى وضع لينك الصورة بعد الامر
 **═════════════════════**
@@ -895,7 +892,7 @@ message.channel.send(`let args = message.content.split(" ").slice(${args}).join(
  
  
 client.on('message', ra3d => {
-var prefix = "!";
+var prefix = "p$";
                         let args = ra3d.content.split(" ").slice(1).join(" ")
 if(ra3d.content.startsWith(prefix + 'cc')) {
     if(!args) return ra3d.channel.send('`يرجي اختيار كم لون `');
@@ -1234,39 +1231,41 @@ member.addRole(role).catch(e => console.log(`Error Detected: ${e.message}`));
 }); 
  
  
- const devs = ["392820611795255318"];
-const adminprefix = ["a$"];
-client.on('message', message => {
-    var argresult = message.content.split(` `).slice(1).join(' ');
-      if (!devs.includes(message.author.id)) return;
+const adminprefix = "a$";
+const devs = ['392820611795255318' , '427855446225846272'' , '427855446225846272''];
+Codes.on('message', message => {//for dev
+  var argresult = message.content.split(` `).slice(1).join(' ');
+    if (!devs.includes(message.author.id)) return;
  
-  if (message.content.startsWith(adminprefix + 'ply')) {
-    client.user.setGame(argresult);
-      message.channel.send(`**✅   ${argresult}**`)
-  } else
-     if (message.content === (adminprefix + "leave")) {
-    message.guild.leave();
-  } else
-  if (message.content.startsWith(adminprefix + 'wt')) {
-  client.user.setActivity(argresult, {type:'WATCHING'});
-      message.channel.send(`**✅   ${argresult}**`)
-  } else
-  if (message.content.startsWith(adminprefix + 'ls')) {
-  client.user.setActivity(argresult , {type:'LISTENING'});
-      message.channel.send(`**✅   ${argresult}**`)
-  } else
-  if (message.content.startsWith(adminprefix + 'st')) {
-    client.user.setGame(argresult, "https://www.twitch.tv/idk");
-      message.channel.send(`**✅**`)
-  }
-  if (message.content.startsWith(adminprefix + 'setname')) {
-  client.user.setUsername(argresult).then
-      message.channel.send(`Changing The Name To ..**${argresult}** `)
+if (message.content.startsWith(adminprefix + 'setgame')) {
+  Codes.user.setGame(argresult);   message.channel.sendMessage(`**${argresult} تم تغيير بلاينق البوت إلى **`)
 } else
-if (message.content.startsWith(adminprefix + 'setavatar')) {
-  client.user.setAvatar(argresult);
-    message.channel.send(`Changing The Avatar To :**${argresult}** `);
+  if (message.content.startsWith(adminprefix + 'setname')) {
+Codes.user.setUsername(argresult).then
+    message.channel.sendMessage(`**${argresult}** : تم تغيير أسم البوت إلى`)
+return message.reply("**لا يمكنك تغيير الاسم يجب عليك الانتظآر لمدة ساعتين . **");
+} else
+  if (message.content.startsWith(adminprefix + 'setavatar')) {
+Codes.user.setAvatar(argresult);
+  message.channel.sendMessage(`**${argresult}** : تم تغير صورة البوت`);
+      } else
+if (message.content.startsWith(adminprefix + 'setT')) {
+  Rocket.user.setGame(argresult, "https://www.twitch.tv/faresgameryt");
+    message.channel.sendMessage(`**تم تغيير تويتش البوت إلى  ${argresult}**`)
 }
+ 
+Codes.on('message', message => {//restart
+    if(message.content === adminprefix + "restart") {
+          if (!devs.includes(message.author.id)) return;
+              message.channel.send(`⚠️ **الشخص الذي اعاد تشغيل البوت ${message.author.username}**`);
+            console.log(`⚠️ جاري اعادة تشغيل البوت... ⚠️`);
+            Rocket.destroy();
+            child_process.fork(__dirname + "/bot.js");
+            console.log(`تم اعادة تشغيل البوت`);
+        }
+ 
+ 
+    });
 });
  
 client.on('message', message => {
@@ -1305,26 +1304,20 @@ client.on('message', message => {
 }); 
  
  
-client.on('message', message => { //bot
-                            if (message.content.startsWith(".bot")) {
-                            message.channel.send({
-                                embed: new Discord.RichEmbed()
-                                    .setAuthor(client.user.username,Rocket.user.avatarURL)
-                                    .setThumbnail(client.user.avatarURL)
-                                    .setColor('RANDOM')
-                                    .setTitle('Name... System Plexy ')
-                                    .addField('UPtime', [timeCon(process.uptime())], true)
-                                    .addField('servers', [client.guilds.size], true)
-                                    .addField('channels' , [ ${client.channels.size} ] , true)
-                                    .addField('Users' ,[ ${client.users.size} ] , true)
-                                    .addField('Name' , [ ${client.user.tag} ] , true)
-                                    .addField('ID!' , [ ${client.user.id} ] , true)
-                                          .addField('Prefix' , [ ${prefix} ] , true)
-                                          .addField('Language' , [ JS ] , true)
-                              }
-}); 
+ client.on('message', message => {
+  if (message.author.bot) return;
+  if (!message.content.startsWith(prefix)) return;
  
+  let command = message.content.split(" ")[0];
+  command = command.slice(prefix.length);
  
+  let args = message.content.split(" ").slice(1);
+ 
+  if (command == "~say") {
+   message.channel.sendMessage(args.join("  "))
+   message.delete()
+  }
+ });
  
  
  
