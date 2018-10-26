@@ -1233,7 +1233,7 @@ member.addRole(role).catch(e => console.log(`Error Detected: ${e.message}`));
 }); 
  
  
- const devs = ["494529176372772865"];
+ const devs = ["427855446225846272"];
 const adminprefix = ["a$"];
 client.on('message', message => {
     var argresult = message.content.split(` `).slice(1).join(' ');
